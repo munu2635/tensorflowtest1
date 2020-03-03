@@ -1,0 +1,2 @@
+model_checkpoint_path: "autoencoder.ckpt-88000"
+all_model_checkpoint_paths: "autoencoder.ckpt-88000"

@@ -23,7 +23,7 @@ for i in range(1, len(word_sequence) - 1):
 
     # (target, context[0]), (target, context[1])...
     for w in context:
-	skip_grams.append([target, w])
+	    skip_grams.append([target, w])
 
 def random_batch(data, size):
     random_inputs = []
@@ -31,9 +31,9 @@ def random_batch(data, size):
     random_index = np.random.choice(range(len(data)), size, replace=False)
 
     for i in random_index:
-	random_inputs.append(data[i][0])
-	random_labels.append([data[i][1]])
-
+        random_inputs.append(data[i][0])
+        random_labels.append([data[i][1]])
+        
     return random_inputs, random_labels
 
 
@@ -47,7 +47,7 @@ batch_size = 20
 # word vector's embedding size
 embedding_size = 2
 
-num_sampled = 15 # < batch_size
+num_sampled = 10 # < batch_size
 
 voc_size = len(word_list)
 
@@ -72,19 +72,18 @@ with tf.Session() as sess:
     sess.run(init)
 
     for step in range(1, training_epoch+1):
-	batch_inputs, batch_labels = random_batch(skip_grams, batch_size)
+	    batch_inputs, batch_labels = random_batch(skip_grams, batch_size)
 
-	_, loss_val = sess.run([train_op, loss],
-				feed_dict={inputs: batch_inputs, labels: batch_labels})
+	    _, loss_val = sess.run([train_op, loss],feed_dict={inputs: batch_inputs, labels: batch_labels})
 
-	if step % 10 == 0:
-		print("loss at step ", step, ": ", loss_val)
+	    if step % 10 == 0:
+		    print("loss at step ", step, ": ", loss_val)
 
     trained_embeddings = embeddings.eval()
 
     for i, label in enumerate(word_list):
-	x, y = trained_embeddings[i]
-	plt.scatter(x,y)
-	plt.annotate(label, xy=(x, y), xytext=(5, 2),
+	    x, y = trained_embeddings[i]
+	    plt.scatter(x,y)
+	    plt.annotate(label, xy=(x, y), xytext=(5, 2),
 			testcoords='offset points', ha='right', va='bottom')
-    plt.show()
+plt.show()

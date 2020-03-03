@@ -38,7 +38,7 @@ for step in range(10000):
     sess.run(train_op, feed_dict={X: x_data, Y: y_data})
 
     if (step + 1) % 10 == 0:
-	print(step + 1, sess.run(cost, feed_dict={X: x_data, Y: y_data}))
+        print(step + 1, sess.run(cost, feed_dict={X: x_data, Y: y_data}))
 
 prediction = tf.argmax(model, 1)
 target = tf.argmax(Y, 1)
